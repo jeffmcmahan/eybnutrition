@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+	<title>Recipes & Cooking Tips | Embracing Your Balance</title>
+	((include: meta.html))
+	((include: charset.html))
+	((include: stylesheets.html))
+</head>
+<body>
+((include: header.html))
+<main class="((nonce))">
+	<div class="container">
+		<h1>Contact Nichole</h1>
+		<p class="lead">Please call or email me to schedule kitchen cleanouts, co-grocery shopping trips, or with general inquiries.</p>
+		<p><b>Email:</b> nicholejm@gmail.com (preferred)</p>
+		<p><b>Phone:</b> <span id="ph"></span> (business hours, please)</p>
+		<p><b></b></p>
+	</div>
+</main>
+((include: footer.html))
+<script>
+	/// Just don't want to print a phone number on the web so plainly.
+	/// So we inject it afterward.
+	const digits = ['734', '985', '3020']
+	document.querySelector('#ph').innerHTML = digits.join('-')
+</script>
+</body>
+</html>

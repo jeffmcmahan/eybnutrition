@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+	<title>Plans & Pricing | Embracing Your Balance</title>
+	((include: meta.html))
+	((include: charset.html))
+	((include: stylesheets.html))
+	<style>
+		.((nonce)) {
+			background-image: url('/plans/foods.jpg');
+			background-size: cover;
+			background-position: center;
+			color: ((color: foreground, -20%));
+			padding: 8rem 0 10rem;
+		}
+		.((nonce)) h1 {
+			margin-bottom: 7rem;
+		}
+		.((nonce)) .orb {
+			background: ((color: accent, 75%));
+			border-radius: 10rem;
+			float: left;
+			height: 10rem;
+			margin-right: 3rem;
+			width: 10rem;
+		}
+		.((nonce)) .orb i {
+			color: white;
+			line-height: 10rem;
+			width: 10rem;
+			text-align: center;
+			font-size: 6rem;
+		}
+		.((nonce)) .plan {
+			padding-top: 3rem;
+			max-width: 50rem;
+			overflow: hidden;
+		}
+
+		@media (max-width: 767px) {
+			.((nonce)) .orb {
+				height: 6rem;
+				margin-right: 3rem;
+				width: 6rem;
+			}
+			.((nonce)) .orb i {
+				line-height: 6rem;
+				width: 6rem;
+				font-size: 5rem;
+			}
+			.((nonce)) .plan {
+				padding-top: 1.5rem;
+			}
+		}
+
+		.((nonce)) a {
+			color: ((color: accent, -30%));
+			font-size: 2.2rem;
+			font-weight: 700;
+			text-decoration: none;
+		}
+		.((nonce)) .plan a + p {
+			margin-bottom: 4rem;
+		}
+		.((nonce)) .plan p {
+			color: ((color: accent, -10%));
+			font-size: 1.8rem;
+		}
+	</style>
+</head>
+<body>
+((include: header.html))
+<main class="((nonce))">
+	<div class="container">
+		<h1>Plans & Pricing</h1>
+		<div class="orb"><i class="las la-walking"></i></div>
+		<div class="plan">
+			<a href="/plans/30-day">First Step (30 days)</a>
+			<p>
+				Get a detailed initial assessment, consistent dietary guidance, accountability resources, detailed maintenance check-ins, follow-up, <nobr>and more.</nobr>
+			</p>
+		</div>
+
+		<div class="orb"><i class="las la-fist-raised"></i></div>
+		<div class="plan">
+			<a href="/plans/6-month">Committed (6 months)</a>
+			<p>
+				Make a lasting change with long-term dietary guidance, detailed 
+				maitnenance check-ins, accountability, <nobr>and more.</nobr>
+			</p>
+		</div>
+
+		<div class="orb"><i class="las la-users"></i></div>
+		<div class="plan">
+			<a href="/plans/accountability-group">Accountability Group</a>
+			<p>
+				Join a community of people, helping to keep each other on the right path with
+				diet and exercise, and get access to recipes and <nobr>other resources.</nobr>
+			</p>
+		</div>
+
+		<div class="orb"><i class="las la-list-alt"></i></div>
+		<div class="plan">
+			<a href="/plans/kitchen-cleanout">Kitchen Cleanout</a>
+			<p>
+				Set yourself up to succeed by getting those unhealthy foods that are 
+				holding you back out of your house.
+			</p>
+		</div>
+
+		<div class="orb"><i class="las la-store-alt"></i></div>
+		<div class="plan">
+			<a href="/plans/co-grocery-shopping">Co-Grocery Shopping</a>
+			<p>
+				Meet me at your favorite grocery store and I'll show you how to 
+				shop if you want to see sustainable results.</p>
+		</div>
+	</div>
+</main>
+((include: footer.html))
+
+</body>
+</html>

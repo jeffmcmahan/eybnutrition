@@ -1,0 +1,49 @@
+.title-box {
+	background: ((color: accent, 80%));
+	background-size: cover;
+	padding: 10rem 0;
+	margin-top: -5rem;
+	margin-bottom: 7.5rem;
+}
+
+.title-box *,
+.title-box .price,
+.title-box .lead {
+	text-shadow: 0 0 7px rgba(0,0,0,0.25);
+	color: white;
+}
+
+.price {
+	font-size: 4.8rem;
+	font-style: italic;
+	color: ((color: accent, -10%));
+	letter-spacing: -0.03em;
+	line-height: 1;
+}
+
+.features h2 {
+	overflow: visible;
+}
+
+.features h2 i {
+	margin-left: -4rem;
+	width: 4rem;
+	font-size: 3rem;
+	position: relative;
+	top: 0.33rem;
+	color: ((color: foreground, 30%));
+}
+
+@media (max-width: 676px) {
+	.features h2 i {
+		display: none;
+	}
+}
+
+form {
+	overflow: visible;
+}
+
+#buy {
+	margin-top: 5rem;
+}

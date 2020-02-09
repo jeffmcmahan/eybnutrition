@@ -1,0 +1,70 @@
+<style>
+	.((nonce)) {
+		background-color: white;
+		box-shadow: 
+			0 1px 1px 0 rgba(0,0,0,0.08),
+			0 2px 5px 0 rgba(0,0,0,0.1);
+		height: 19rem;
+		position: relative;
+		z-index: 99;
+	}
+	.((nonce)) .container {
+		position: relative;
+	}
+	.((nonce)) .logo {
+		display: block;
+		overflow: hidden;
+		margin: 0.5rem auto 0;
+		width: 25rem;
+	}
+	.((nonce)) .nav {
+		text-align: center;
+		line-height: 6rem;
+		white-space: nowrap;
+	}
+	.((nonce)) .nav a {
+		color: ((color: accent, -50%));
+		font-weight: 600;
+		font-size: 2rem;
+		text-decoration: none;
+		opacity: 0.85;
+		margin-left: 0.6rem;
+		margin-right: 0.6rem;
+	}
+	.((nonce)) .nav a:hover {
+		opacity: 1;
+	}
+	.((nonce)) .nav a:last-child {
+		color: ((color: accent, -15%));
+	}
+
+	@media (min-width: 768px) {
+		.((nonce)) {
+			height: 13.5rem;
+		}
+		.((nonce)) .nav {
+			float: right;
+			line-height: 13.5rem;
+		}
+		.((nonce)) .logo {
+			display: inline-block;
+			float: left;
+		}
+		.((nonce)) .nav a {
+			font-size: 1.8rem;
+			margin-left: 1.5rem;
+			margin-right: 0;
+		}
+	}
+</style>
+
+<header class="((nonce))">
+	<div class="container">
+		<a class="logo" href="/"><img src="/logo.png"></a>
+		<nav class="nav">
+			<a href="/about-nichole">About Me</a>
+			<a href="/plans">Plans & Pricing</a>
+			<a href="/recipes">Recipes</a>
+		</nav>
+	</div>
+</header>

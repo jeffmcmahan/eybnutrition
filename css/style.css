@@ -1,0 +1,113 @@
+html {
+	font-size: 50%;
+}
+
+body {
+	box-sizing: border-box;
+	color: ((color: foreground, -40%));
+	font-family: -apple-system, Roboto, Arial, sans-serif;
+	line-height: 1.5;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	color: ((color: accent, -10%));
+	font-family: 'Playfair Display', serif;
+	font-size: 5rem;
+	line-height: 1.2;
+	margin-top: 0;
+}
+
+* + h2 {
+	margin-top: 5rem;
+}
+
+h2 {
+	font-size: 2.2rem;
+	line-height: 1.2;
+	margin-bottom: 15px;
+}
+
+p {
+	font-size: 1.75rem;
+	line-height: 1.6;
+	max-width: 77rem;
+}
+
+p.lead {
+	color: ((color: accent, -10%));
+	font-size: 2.4rem;
+	line-height: 1.33;
+	font-weight: 400;
+	font-style: italic;
+}
+
+hr {
+	background: transparent;
+	border-top: 1px dotted #bbb;
+	border-bottom: 0;
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+
+.container {
+	max-width: 60em;
+	margin: 0 auto;
+	padding: 0 3.5rem;
+}
+
+main {
+	padding: 5rem 0 7.5rem 0;
+}
+
+img {
+	max-width: 100%;
+}
+
+.button,
+input[type=submit] {
+	background: ((color: foreground));
+	border: none;
+	border-radius: 3px;
+	box-shadow: 2px 2px 5px 0 rgba(0,0,0,0.2);
+	color: white;
+	cursor: pointer;
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 2rem;
+	padding: 1.5rem 3rem;
+	text-decoration: none;
+}
+
+.button:hover,
+input[type=submit]:hover {
+	background: ((color: foreground, 10%));
+}
+
+.button.white,
+input[type=submit].white {
+	background: white;
+	color: ((color: accent));
+}
+
+.button.white:hover,
+input[type=submit].white:hover {
+	background: white;
+	color: ((color: accent, -15%));
+}
+
+/* Scale controls ***************************/
+
+body {
+	font-size: 1.4rem;
+}
+
+@media (min-width: 600px) {
+	html {
+		font-size: 62.5%;
+	}
+	body {
+		font-size: 1.6rem;
+	}
+}
