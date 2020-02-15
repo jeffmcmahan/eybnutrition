@@ -5,8 +5,8 @@ import {interp} from './interp/main.mjs'
 
 const getHtmlDoc = async uri => {
 
-	// Find the file with the matching canonical URL and return its content.
-	// => string
+	/// Find the file with the matching canonical URL and return its content.
+	/// => string
 
 	if (uri.includes('..')) {
 		throw new Error('Could not resolve URI string to path.')
@@ -16,8 +16,8 @@ const getHtmlDoc = async uri => {
 
 const mime = uri => {
 
-	// Gets the correct MIME type for the given URI, if any.
-	// => string
+	/// Gets the correct MIME type for the given URI, if any.
+	/// => string
 
 	const mimeType = {
 		'.js': 'application/javascript',
@@ -33,7 +33,6 @@ const mime = uri => {
 }
 
 createServer(async (req, res) => {
-
 	let uri = req.url.slice(1)
 	let data = ''
 	if (!uri.includes('.')) {
@@ -49,7 +48,6 @@ createServer(async (req, res) => {
 			data = await interp(data)
 		}
 	}
-
 	if (data instanceof Error) {
 		console.log(data)
 		res.statusCode = 404
@@ -59,5 +57,4 @@ createServer(async (req, res) => {
 		res.setHeader('Content-Type', mime(uri))
 		res.end(data)
 	}
-
-}).listen(80)
+}).listen(3000)
