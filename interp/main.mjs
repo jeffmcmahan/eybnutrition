@@ -6,8 +6,8 @@ const functions = {color, include, print} // Runtime functions.
 
 const parseExpression = src => {
 
-	// Parses the given src into an object representing a function call.
-	// => Object
+	/// Parses the given src into an object representing a function call.
+	/// => Object
 
 	src = src.slice(2, -2)
 	const functionName = src.split(':')[0].trim()
@@ -17,8 +17,8 @@ const parseExpression = src => {
 
 export const interp = async src => {
 
-	// Interpolates variables into text files of all kinds.
-	// => string
+	/// Interpolates variables into text files of all kinds.
+	/// => string
 
 	let pos = 0
 	const expressions = []

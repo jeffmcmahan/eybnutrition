@@ -5,8 +5,8 @@ const colors = {
 
 export const color = (colorName, luminosity = '0%', alpha = '100%') => {
 
-	// Creates a color of the given shade/tint and opacity.
-	// => string
+	/// Creates a color of the given shade/tint and opacity.
+	/// => string
 
 	let [r, g, b] = (colors[colorName] || [])
 	luminosity = (parseFloat(luminosity.slice(0, -1)) / 100)

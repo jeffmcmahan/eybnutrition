@@ -1,6 +1,5 @@
 const values = {
-	script: 'Justlove, serif',
-	serif: 'NYTStymie, sans-serif'
+	script: 'Justlove, serif'
 }
 
 export const print = (...vars) => {

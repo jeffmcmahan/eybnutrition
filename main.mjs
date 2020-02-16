@@ -1,60 +1,62 @@
 import {createServer} from 'http'
 import {promises as fs} from 'fs'
-import {extname} from 'path'
+import {extname, join, dirname} from 'path'
 import {interp} from './interp/main.mjs'
 
-const getHtmlDoc = async uri => {
+const root = dirname(import.meta.url.slice(7))
 
-	/// Find the file with the matching canonical URL and return its content.
-	/// => string
-
-	if (uri.includes('..')) {
-		throw new Error('Could not resolve URI string to path.')
-	}
-	return await fs.readFile(uri, 'utf8')
+const mimeTypes = {
+	'.js': 'application/javascript',
+	'.pdf': 'application/pdf',
+	'.css': 'text/css',
+	'.html': 'text/html',
+	'.jpg': 'image/jpeg',
+	'.png': 'image/png',
+	'.ico': 'image/x-icon',
+	'.svg': 'image/svg+xml'
 }
 
-const mime = uri => {
+const fname = uri => {
 
-	/// Gets the correct MIME type for the given URI, if any.
+	/// Produces a safe fname string (cannot leave content dir).
 	/// => string
 
-	const mimeType = {
-		'.js': 'application/javascript',
-		'.css': 'text/css',
-		'.html': 'text/html',
-		'.jpg': 'image/jpeg',
-		'.png': 'image/png',
-		'.ico': 'image/x-icon',
-		'.svg': 'image/svg+xml'
-	}[extname(uri).toLowerCase()]
-
-	return (mimeType || 'text/plain')
+	const contentDir = join(root, 'content')
+	uri = join(contentDir, uri)
+	if (!uri.startsWith(contentDir)) {
+		throw new Error('Ha!')
+	}
+	return uri
 }
 
 createServer(async (req, res) => {
-	let uri = req.url.slice(1)
+
+	/// The webserver...
+	/// => undefined
+
 	let data = ''
+	let uri = req.url.slice(1)
+	
 	if (!uri.includes('.')) {
 		uri = (uri || 'home')
 		uri += '/content.html'
-		const html = await getHtmlDoc(uri).catch(e => e)
+		const html = await fs.readFile(fname(uri), 'utf8').catch(e => e)
 		data = await interp(html).catch(e => e)
-	} else if (uri.match(/\.(jpg)|(png)|(ico)$/)) {
-		data = await fs.readFile(uri).catch(e => e)
+	} else if (uri.match(/\.(jpg)|(png)|(ico)|(pdf)$/)) {
+		data = await fs.readFile(fname(uri)).catch(e => e)
 	} else {
-		data = await fs.readFile(uri, 'utf8').catch(e => e)
-		if (data) {
-			data = await interp(data)
-		}
+		data = await fs.readFile(fname(uri), 'utf8').catch(e => e)
+		data = await interp(data)
 	}
+
 	if (data instanceof Error) {
 		console.log(data)
 		res.statusCode = 404
 		res.end('Not Found')
 	} else {
+		const mime = (mimeTypes[extname(uri).toLowerCase()] || 'text/plain')
+		res.setHeader('Content-Type', mime)
 		res.setHeader('Cache-Control', 'max-age=3600')
-		res.setHeader('Content-Type', mime(uri))
 		res.end(data)
 	}
 }).listen(3000)
