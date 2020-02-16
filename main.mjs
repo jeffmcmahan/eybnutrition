@@ -1,5 +1,6 @@
 import {createServer} from 'http'
 import {promises as fs} from 'fs'
+import {createReadStream} from 'fs'
 import {extname, join, dirname} from 'path'
 import {interp} from './interp/main.mjs'
 
@@ -17,10 +18,6 @@ const mimeTypes = {
 }
 
 const fname = uri => {
-
-	/// Produces a safe fname string (cannot leave content dir).
-	/// => string
-
 	const contentDir = join(root, 'content')
 	uri = join(contentDir, uri)
 	if (!uri.startsWith(contentDir)) {
@@ -29,33 +26,35 @@ const fname = uri => {
 	return uri
 }
 
+const serveStatic = async (uri, res) => {
+	const mime = (mimeTypes[extname(uri).toLowerCase()] || 'text/plain')
+	res.setHeader('Content-Type', mime)
+	res.setHeader('Cache-Control', 'max-age=3600')
+	if (uri.match(/\.(jpg)|(png)|(ico)|(pdf)$/)) {
+		createReadStream(fname(uri)).pipe(res)
+	} else {
+		const raw = await fs.readFile(fname(uri), 'utf8').catch(e => e)
+		const html = await interp(raw)
+		res.end(html)
+	}
+}
+
 createServer(async (req, res) => {
-
-	/// The webserver...
-	/// => undefined
-
 	let data = ''
 	let uri = req.url.slice(1)
-	
-	if (!uri.includes('.')) {
+	if (uri.includes('.')) {
+		serveStatic(uri, res)
+	} else {
 		uri = (uri || 'home')
 		uri += '/content.html'
 		const html = await fs.readFile(fname(uri), 'utf8').catch(e => e)
 		data = await interp(html).catch(e => e)
-	} else if (uri.match(/\.(jpg)|(png)|(ico)|(pdf)$/)) {
-		data = await fs.readFile(fname(uri)).catch(e => e)
-	} else {
-		data = await fs.readFile(fname(uri), 'utf8').catch(e => e)
-		data = await interp(data)
-	}
-
-	if (data instanceof Error) {
-		console.log(data)
-		res.statusCode = 404
-		res.end('Not Found')
-	} else {
-		const mime = (mimeTypes[extname(uri).toLowerCase()] || 'text/plain')
-		res.setHeader('Content-Type', mime)
+		if (data instanceof Error) {
+			console.log(data)
+			res.statusCode = 404
+			res.end('Not Found')
+		}
+		res.setHeader('Content-Type', 'text/html')
 		res.setHeader('Cache-Control', 'max-age=3600')
 		res.end(data)
 	}
