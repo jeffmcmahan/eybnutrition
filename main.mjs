@@ -3,6 +3,7 @@ import {promises as fs} from 'fs'
 import {createReadStream} from 'fs'
 import {extname, join, dirname} from 'path'
 import {interp} from './interp/main.mjs'
+import {URL} from 'url'
 
 const root = dirname(import.meta.url.slice(7))
 
@@ -41,7 +42,7 @@ const serveStatic = async (uri, res) => {
 
 createServer(async (req, res) => {
 	let data = ''
-	let uri = req.url.slice(1)
+	let uri = new URL(req.url, 'http://eybnutrition.com').pathname.slice(1)
 	if (uri.includes('.')) {
 		serveStatic(uri, res)
 	} else {
